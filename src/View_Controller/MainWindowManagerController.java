@@ -33,7 +33,10 @@ public class MainWindowManagerController {
         Platform.exit();
     }
 
-    public void reportsClicked(MouseEvent mouseEvent) {
+    public void reportsClicked(MouseEvent mouseEvent) throws IOException {
+        FXMLLoader loader = getFxmlLoader("reports.fxml");
+        ReportsController reportsController = loader.getController();
+        loadNewScene(mouseEvent, loader);
     }
 
     public void deleteTicket() {

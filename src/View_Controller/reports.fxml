@@ -2,35 +2,56 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="632.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.Reports">
+<AnchorPane prefHeight="634.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.ReportsController">
    <children>
-      <Pane layoutX="15.0" layoutY="14.0" prefHeight="605.0" prefWidth="930.0">
+      <Pane layoutY="2.0" prefHeight="662.0" prefWidth="696.0">
          <children>
-            <Label layoutX="445.0" layoutY="14.0" text="Reports" />
-            <TableView layoutX="14.0" layoutY="66.0" prefHeight="200.0" prefWidth="380.0">
+            <Label layoutX="315.0" layoutY="1.0" text="Reports">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+            <TableView fx:id="ticketTypeByLocationTableView" layoutX="291.0" layoutY="75.0" prefHeight="200.0" prefWidth="380.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Ticket ID" />
-                <TableColumn prefWidth="75.0" text="Type" />
-                  <TableColumn prefWidth="75.0" text="Location" />
-                  <TableColumn prefWidth="154.0" text="Creation Date/Time" />
+                <TableColumn fx:id="tTBLTicketIDColumn" prefWidth="75.0" text="Ticket ID" />
+                <TableColumn fx:id="tTBLTypeColumn" prefWidth="75.0" text="Type" />
+                  <TableColumn fx:id="tTBLLocationColumn" prefWidth="75.0" text="Location" />
+                  <TableColumn fx:id="tTBLCreationDateAndTimeColumn" prefWidth="154.0" text="Creation Date/Time" />
               </columns>
             </TableView>
-            <ComboBox layoutX="14.0" layoutY="32.0" prefWidth="150.0" promptText="Select a Ticket Type" />
-            <Label layoutX="204.0" layoutY="36.0" text="Ticket Type Ordered By Location" />
-            <TableView layoutX="10.0" layoutY="362.0" prefHeight="200.0" prefWidth="185.0">
+            <ComboBox fx:id="ticketTypeComboBox" layoutX="291.0" layoutY="41.0" onAction="#typeSelection" prefWidth="150.0" promptText="Select a Ticket Type" />
+            <Label layoutX="456.0" layoutY="44.0" text="Ticket Type Ordered By Location">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <TableView fx:id="ticketsPerTechnicianTableView" layoutX="24.0" layoutY="75.0" prefHeight="200.0" prefWidth="237.0">
               <columns>
-                <TableColumn prefWidth="91.0" text="Technician ID" />
-                <TableColumn prefWidth="93.0" text="Total Tickets" />
+                <TableColumn fx:id="tPTTechnicianNameAndIDColumn" prefWidth="153.0" text="Technician Name and ID" />
+                <TableColumn fx:id="tPTTotalTicketsColumn" prefWidth="83.0" text="Total Tickets" />
               </columns>
             </TableView>
-            <Label layoutX="45.0" layoutY="335.0" text="Tickets Per Technician" />
-            <TableView layoutX="311.0" layoutY="328.0" prefHeight="263.0" prefWidth="595.0">
+            <Label layoutX="70.0" layoutY="44.0" text="Tickets Per Technician">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <TableView fx:id="ticketsPerEmployeeTableView" layoutX="23.0" layoutY="349.0" prefHeight="263.0" prefWidth="650.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="tPEEmployeeIDColumn" prefWidth="75.0" text="Employee ID" />
+                <TableColumn fx:id="tPEEmployeeFirstNameColumn" prefWidth="74.0" text="First Name" />
+                  <TableColumn fx:id="tPEEmployeeLastNameColumn" prefWidth="83.0" text="Last Name" />
+                  <TableColumn fx:id="tPELocationColumn" prefWidth="75.0" text="Location" />
+                  <TableColumn fx:id="tPETypeColumn" prefWidth="75.0" text="Type" />
+                  <TableColumn fx:id="tPECreateDateAndTimeColumn" prefWidth="108.0" text="Create Date/Time" />
+                  <TableColumn fx:id="tPEAssignedTechnicianColumn" prefWidth="159.0" text="Assigned Technician" />
               </columns>
             </TableView>
+            <Label layoutX="278.0" layoutY="324.0" text="Tickets Per Employee">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <TextField fx:id="employeeSearchTextBox" layoutX="24.0" layoutY="321.0" prefHeight="25.0" prefWidth="171.0" promptText="Search for an employee" />
+            <Button layoutX="621.0" layoutY="623.0" mnemonicParsing="false" text="Back" />
          </children>
       </Pane>
    </children>

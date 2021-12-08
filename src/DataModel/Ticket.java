@@ -1,7 +1,5 @@
 package DataModel;
 
-import java.sql.Timestamp;
-
 public class Ticket {
 
     private int ticketID;
@@ -11,7 +9,9 @@ public class Ticket {
     private int priority;
     private int technicianID;
     private int requesterID;
-    private Timestamp creation_date;
+    private String create_date;
+    private int count;
+    private String fullNameAndID;
 
     public Ticket(int ticketID, String type, String location, String description, int priority, int technicianID, int requesterID) {
         this.ticketID = ticketID;
@@ -23,19 +23,24 @@ public class Ticket {
         this.requesterID = requesterID;
     }
 
-    public Ticket(int ticketID, String type, String location, Timestamp creation_date) {
+    public Ticket(int ticketID, String type, String location, String create_date) {
         this.ticketID = ticketID;
         this.type = type;
         this.location = location;
-        this.creation_date = creation_date;
+        this.create_date = create_date;
+    }
+
+    public Ticket(String fullNameAndID, int count) {
+        this.fullNameAndID = fullNameAndID;
+        this.count = count;
     }
 
     public int getTicketID() {
         return ticketID;
     }
 
-    public void setTicketID(int appointmentID) {
-        this.ticketID = appointmentID;
+    public void setTicketID(int ticketID) {
+        this.ticketID = ticketID;
     }
 
     public String getType() {
@@ -84,6 +89,30 @@ public class Ticket {
 
     public void setRequesterID(int requesterID) {
         this.requesterID = requesterID;
+    }
+
+    public String getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(String create_date) {
+        this.create_date = create_date;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public String getFullNameAndID() {
+        return fullNameAndID;
+    }
+
+    public void setFullNameAndID(String fullNameAndID) {
+        this.fullNameAndID = fullNameAndID;
     }
 
     @Override

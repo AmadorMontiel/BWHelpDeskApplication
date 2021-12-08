@@ -1,9 +1,9 @@
 package Implementations;
 
-import DataModel.Ticket;
 import DataModel.Employee;
 import DataModel.Teacher;
 import DataModel.Technician;
+import DataModel.Ticket;
 import Utility.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 public class TicketDaoImpl {
 
@@ -155,12 +154,11 @@ public class TicketDaoImpl {
         }
     }
 
-    //TODO pull tickets by type for reports
     public static ObservableList<Ticket> getTicketsByType(String typeSelected) {
         ObservableList<Ticket> ticketsByType = FXCollections.observableArrayList();
 
         try {
-            String sql = "SELECT ticket_id, type, location FROM tickets WHERE type = \"" + typeSelected +  "\" ORDER BY location";
+            String sql = "SELECT * FROM tickets WHERE type = \"" + typeSelected +  "\" ORDER BY location";
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -168,7 +166,7 @@ public class TicketDaoImpl {
                 int ticketID = rs.getInt("ticket_id");
                 String type = rs.getString("type");
                 String location = rs.getString("location");
-                Timestamp creation_date = rs.getTimestamp("create_date");
+                String creation_date = rs.getString("create_date");
                 Ticket t = new Ticket(ticketID, type, location, creation_date);
                 ticketsByType.add(t);
             }
@@ -176,5 +174,29 @@ public class TicketDaoImpl {
             e.printStackTrace();
         }
         return ticketsByType;
+    }
+
+    public static ObservableList<Ticket> getTotalTicketsPerTechnician() {
+        ObservableList<Ticket> totalTicketsPerTechnician = FXCollections.observableArrayList();
+
+        try {
+            String sql = "SELECT technician_id, COUNT(*) as total, firstname, lastname FROM tickets, employees WHERE employee_id = technician_id";
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int technicianID = rs.getInt("technician_id");
+                int count = rs.getInt("total");
+                String firstName = rs.getString("firstname");
+                String lastName = rs.getString("lastname");
+                String fullNameAndID = "ID: " + technicianID + " Name: " + firstName + " " + lastName;
+
+                Ticket t = new Ticket(fullNameAndID, count);
+                totalTicketsPerTechnician.add(t);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalTicketsPerTechnician;
     }
 }
