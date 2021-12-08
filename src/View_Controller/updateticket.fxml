@@ -23,7 +23,7 @@
         </VBox>
         <VBox layoutX="139.0" layoutY="50.0" prefHeight="210.0" prefWidth="161.0" spacing="11.0">
             <children>
-                <TextField id="appointmentIDTextField" fx:id="appointmentIDTextField" disable="true" editable="false" />
+                <TextField id="appointmentIDTextField" fx:id="ticketIDTextField" disable="true" editable="false" />
                 <ComboBox id="typeComboBox" fx:id="typeComboBox" prefHeight="25.0" prefWidth="100.0" />
                 <ComboBox id="priorityComboBox" fx:id="priorityComboBox" prefHeight="25.0" prefWidth="86.0" />
                 <ComboBox id="locationComboBox" fx:id="locationComboBox" prefHeight="25.0" prefWidth="151.0" />
