@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="433.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.UpdateAppointmentController">
+    <children>
+        <Label layoutX="14.0" layoutY="14.0" text="Update Appointment">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font></Label>
+        <Button id="closeButton" layoutX="541.0" layoutY="394.0" mnemonicParsing="false" onMousePressed="#close" text="Close" />
+        <VBox layoutX="12.0" layoutY="50.0" prefHeight="196.0" prefWidth="123.0" spacing="20.0">
+            <children>
+                <Label text="Appointment ID" />
+                <Label text="Type" />
+                <Label text="Priority" />
+                <Label text="Location" />
+                <Label text="Requester ID" />
+                <Label prefHeight="17.0" prefWidth="125.0" text="Assigned Technician" />
+            </children>
+        </VBox>
+        <VBox layoutX="139.0" layoutY="50.0" prefHeight="210.0" prefWidth="161.0" spacing="11.0">
+            <children>
+                <TextField id="appointmentIDTextField" fx:id="appointmentIDTextField" disable="true" editable="false" />
+                <ComboBox id="typeComboBox" fx:id="typeComboBox" prefHeight="25.0" prefWidth="100.0" />
+                <ComboBox id="priorityComboBox" fx:id="priorityComboBox" prefHeight="25.0" prefWidth="86.0" />
+                <ComboBox id="locationComboBox" fx:id="locationComboBox" prefHeight="25.0" prefWidth="151.0" />
+                <ComboBox fx:id="requesterComboBox" prefWidth="150.0" />
+                <ComboBox id="assignedTechnicianComboBox" fx:id="technicianComboBox" prefWidth="150.0" />
+            </children>
+        </VBox>
+        <Label layoutX="12.0" layoutY="283.0" text="Description" />
+        <TextArea id="descriptionTextBox" fx:id="descriptionTextBox" layoutX="12.0" layoutY="300.0" prefHeight="86.0" prefWidth="576.0" />
+        <Button id="saveButton" layoutX="14.0" layoutY="394.0" mnemonicParsing="false" onMousePressed="#saveUpdatedAppointment" text="Save" />
+    </children>
+</AnchorPane>

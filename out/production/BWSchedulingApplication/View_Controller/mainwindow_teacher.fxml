@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.MainWindowTeacherController">
+    <children>
+        <Label layoutX="131.0" layoutY="29.0" text="Broadwater Help Desk Scheduling">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Label>
+        <Pane layoutX="225.0" layoutY="82.0" prefHeight="140.0" prefWidth="351.0" style="-fx-border-color: black; -fx-background-color: lightblue;">
+            <children>
+                <Label layoutX="115.0" layoutY="1.0" text="Appointments">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Button layoutX="115.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#addAppointmentClicked" text="Add" />
+                <Button layoutX="181.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#updateAppointmentClicked" text="Update" />
+                <ComboBox fx:id="appointmentsComboBox" layoutX="85.0" layoutY="48.0" prefHeight="25.0" prefWidth="182.0" />
+            </children>
+        </Pane>
+        <Button fx:id="exitButton" layoutX="383.0" layoutY="277.0" mnemonicParsing="false" onMouseClicked="#exitProgram" text="Exit" />
+    </children>
+</Pane>
