@@ -1,8 +1,8 @@
 package View_Controller;
 
-import DataModel.Appointment;
+import DataModel.Ticket;
 import DataModel.Employee;
-import Implementations.AppointmentDaoImpl;
+import Implementations.TicketDaoImpl;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class MainWindowManagerController {
 
-    public ComboBox<Appointment> appointmentsComboBox;
+    public ComboBox<Ticket> ticketComboBox;
     public Employee signedInEmployee;
     public Alert errorAlert = new Alert(Alert.AlertType.ERROR);
     public Alert deletionConfirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -26,7 +26,7 @@ public class MainWindowManagerController {
 
 
     public void initialize() {
-        appointmentsComboBox.setItems(AppointmentDaoImpl.getAllAppointments());
+        ticketComboBox.setItems(TicketDaoImpl.getAllTickets());
     }
 
     public void exitProgram() {
@@ -36,23 +36,23 @@ public class MainWindowManagerController {
     public void reportsClicked(MouseEvent mouseEvent) {
     }
 
-    public void deleteAppointment() {
+    public void deleteTicket() {
         {
-            if(appointmentsComboBox.getSelectionModel().getSelectedItem() != null) {
+            if(ticketComboBox.getSelectionModel().getSelectedItem() != null) {
                 deletionConfirmationAlert.setTitle("Confirmation");
-                deletionConfirmationAlert.setHeaderText("Confirm Appointment Deletion");
-                deletionConfirmationAlert.setContentText("Are you sure you want to delete Appointment: "
-                        + appointmentsComboBox.getSelectionModel().getSelectedItem().getType());
+                deletionConfirmationAlert.setHeaderText("Confirm Ticket Deletion");
+                deletionConfirmationAlert.setContentText("Are you sure you want to delete Ticket: "
+                        + ticketComboBox.getSelectionModel().getSelectedItem().getType());
                 deletionConfirmationAlert.showAndWait();
 
                 if (deletionConfirmationAlert.getResult() == ButtonType.OK) {
                     try {
-                        AppointmentDaoImpl.deleteAppointment(appointmentsComboBox.getSelectionModel().getSelectedItem().getAppointmentID());
+                        TicketDaoImpl.deleteTicket(ticketComboBox.getSelectionModel().getSelectedItem().getTicketID());
                         deletionConfirmedAlert.setTitle("Deletion Confirmed");
-                        deletionConfirmedAlert.setHeaderText("Appointment Deleted");
-                        deletionConfirmedAlert.setContentText(appointmentsComboBox.getSelectionModel().getSelectedItem().toString() + " has been deleted!");
+                        deletionConfirmedAlert.setHeaderText("Ticket Deleted");
+                        deletionConfirmedAlert.setContentText(ticketComboBox.getSelectionModel().getSelectedItem().toString() + " has been deleted!");
                         deletionConfirmedAlert.show();
-                        appointmentsComboBox.getItems().remove(appointmentsComboBox.getSelectionModel().getSelectedItem());
+                        ticketComboBox.getItems().remove(ticketComboBox.getSelectionModel().getSelectedItem());
 
                     } catch (NullPointerException e) {
                         e.printStackTrace();
@@ -60,30 +60,30 @@ public class MainWindowManagerController {
                 }
             } else {
                 errorAlert.setTitle("Error");
-                errorAlert.setHeaderText("No Appointment Selected");
-                errorAlert.setContentText("Please select an appointment to delete");
+                errorAlert.setHeaderText("No Ticket Selected");
+                errorAlert.setContentText("Please select an Ticket to delete");
                 errorAlert.show();
             }
         }
     }
 
-    public void updateAppointmentClicked(MouseEvent mouseEvent) throws IOException {
-        FXMLLoader loader = getFxmlLoader("updateappointment.fxml");
-        UpdateAppointmentController updateAppointmentController = loader.getController();
-        if (appointmentsComboBox.getSelectionModel().getSelectedItem() != null) {
-            updateAppointmentController.receiveAppointmentAndEmployee(appointmentsComboBox.getSelectionModel().getSelectedItem(), signedInEmployee);
+    public void updateTicketClicked(MouseEvent mouseEvent) throws IOException {
+        FXMLLoader loader = getFxmlLoader("updateticket.fxml");
+        UpdateTicketController updateTicketController = loader.getController();
+        if (ticketComboBox.getSelectionModel().getSelectedItem() != null) {
+            updateTicketController.receiveTicketAndEmployee(ticketComboBox.getSelectionModel().getSelectedItem(), signedInEmployee);
             loadNewScene(mouseEvent, loader);
         } else {
             errorAlert.setTitle("Error");
-            errorAlert.setHeaderText("No Appointment Selected");
-            errorAlert.setContentText("Please select an appointment to update.");
+            errorAlert.setHeaderText("No Ticket Selected");
+            errorAlert.setContentText("Please select an Ticket to update.");
             errorAlert.show();
         }
     }
 
-    public void addAppointmentClicked(MouseEvent mouseEvent) throws IOException {
-        FXMLLoader loader = getFxmlLoader("addappointment.fxml");
-        AddAppointmentController aAController = loader.getController();
+    public void addTicketClicked(MouseEvent mouseEvent) throws IOException {
+        FXMLLoader loader = getFxmlLoader("addticket.fxml");
+        AddTicketController aAController = loader.getController();
         aAController.receiveUser(signedInEmployee);
         loadNewScene(mouseEvent, loader);
     }

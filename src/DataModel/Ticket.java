@@ -1,8 +1,8 @@
 package DataModel;
 
-public class Appointment {
+public class Ticket {
 
-    private int appointmentID;
+    private int ticketID;
     private String type;
     private String location;
     private String description;
@@ -10,8 +10,8 @@ public class Appointment {
     private int technicianID;
     private int requesterID;
 
-    public Appointment(int appointmentID, String type, String location, String description, int priority, int technicianID, int requesterID) {
-        this.appointmentID = appointmentID;
+    public Ticket(int ticketID, String type, String location, String description, int priority, int technicianID, int requesterID) {
+        this.ticketID = ticketID;
         this.type = type;
         this.location = location;
         this.description = description;
@@ -20,12 +20,12 @@ public class Appointment {
         this.requesterID = requesterID;
     }
 
-    public int getAppointmentID() {
-        return appointmentID;
+    public int getTicketID() {
+        return ticketID;
     }
 
-    public void setAppointmentID(int appointmentID) {
-        this.appointmentID = appointmentID;
+    public void setTicketID(int appointmentID) {
+        this.ticketID = appointmentID;
     }
 
     public String getType() {
@@ -78,7 +78,7 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "ID: "+ appointmentID +
+        return "ID: "+ ticketID +
                 " Type: " + type;
     }
 }

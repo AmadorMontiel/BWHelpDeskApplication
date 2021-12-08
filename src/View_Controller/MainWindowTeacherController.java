@@ -1,8 +1,8 @@
 package View_Controller;
 
-import DataModel.Appointment;
+import DataModel.Ticket;
 import DataModel.Employee;
-import Implementations.AppointmentDaoImpl;
+import Implementations.TicketDaoImpl;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,7 +17,7 @@ import java.io.IOException;
 
 public class MainWindowTeacherController {
 
-    public ComboBox<Appointment> appointmentsComboBox;
+    public ComboBox<Ticket> ticketsComboBox;
     public Employee signedInEmployee;
     public Alert errorAlert = new Alert(Alert.AlertType.ERROR);
 
@@ -28,23 +28,23 @@ public class MainWindowTeacherController {
         Platform.exit();
     }
 
-    public void addAppointmentClicked(MouseEvent mouseEvent) throws IOException {
-        FXMLLoader loader = getFxmlLoader("addappointment.fxml");
-        AddAppointmentController aAController = loader.getController();
+    public void addTicketClicked(MouseEvent mouseEvent) throws IOException {
+        FXMLLoader loader = getFxmlLoader("addticket.fxml");
+        AddTicketController aAController = loader.getController();
         aAController.receiveUser(signedInEmployee);
         loadNewScene(mouseEvent, loader);
     }
 
-    public void updateAppointmentClicked(MouseEvent mouseEvent) throws IOException {
-        FXMLLoader loader = getFxmlLoader("updateappointment.fxml");
-        UpdateAppointmentController updateAppointmentController = loader.getController();
-        if (appointmentsComboBox.getSelectionModel().getSelectedItem() != null) {
-            updateAppointmentController.receiveAppointmentAndEmployee(appointmentsComboBox.getSelectionModel().getSelectedItem(), signedInEmployee);
+    public void updateTicketClicked(MouseEvent mouseEvent) throws IOException {
+        FXMLLoader loader = getFxmlLoader("updateticket.fxml");
+        UpdateTicketController updateTicketController = loader.getController();
+        if (ticketsComboBox.getSelectionModel().getSelectedItem() != null) {
+            updateTicketController.receiveTicketAndEmployee(ticketsComboBox.getSelectionModel().getSelectedItem(), signedInEmployee);
             loadNewScene(mouseEvent, loader);
         } else {
             errorAlert.setTitle("Error");
-            errorAlert.setHeaderText("No Appointment Selected");
-            errorAlert.setContentText("Please select an appointment to update.");
+            errorAlert.setHeaderText("No Ticket Selected");
+            errorAlert.setContentText("Please select a ticket to update.");
             errorAlert.show();
         }
 
@@ -52,7 +52,7 @@ public class MainWindowTeacherController {
 
     public void receiveUser(Employee employeeByName) {
         signedInEmployee = employeeByName;
-        appointmentsComboBox.setItems(AppointmentDaoImpl.getAllAppointmentsByRequester(signedInEmployee.getId()));
+        ticketsComboBox.setItems(TicketDaoImpl.getAllTicketsByRequester(signedInEmployee.getId()));
 
     }
 

@@ -18,11 +18,11 @@
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
-                <Button layoutX="66.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#addAppointmentClicked" text="Add" />
-                <Button layoutX="146.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#updateAppointmentClicked" text="Update" />
-                <ComboBox fx:id="appointmentsComboBox" layoutX="85.0" layoutY="48.0" prefHeight="25.0" prefWidth="182.0" />
+                <Button layoutX="66.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#addTicketClicked" text="Add" />
+                <Button layoutX="146.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#updateTicketClicked" text="Update" />
+                <ComboBox fx:id="ticketComboBox" layoutX="85.0" layoutY="48.0" prefHeight="25.0" prefWidth="182.0" />
                 <Button layoutX="145.0" layoutY="137.0" mnemonicParsing="false" onMouseClicked="#reportsClicked" text="Reports" />
-            <Button layoutX="236.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#deleteAppointment" text="Delete" />
+            <Button layoutX="236.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#deleteTicket" text="Delete" />
             </children>
         </Pane>
         <Button fx:id="exitButton" layoutX="383.0" layoutY="277.0" mnemonicParsing="false" onMouseClicked="#exitProgram" text="Exit" />

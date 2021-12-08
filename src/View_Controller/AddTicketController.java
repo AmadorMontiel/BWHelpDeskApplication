@@ -1,7 +1,7 @@
 package View_Controller;
 
 import DataModel.*;
-import Implementations.AppointmentDaoImpl;
+import Implementations.TicketDaoImpl;
 import Implementations.EmployeeDaoImpl;
 import Implementations.SchoolDaoImpl;
 import Implementations.TechnicianDaoImpl;
@@ -20,15 +20,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AddAppointmentController {
+public class AddTicketController {
 
     //TODO change requester combobox to only allow selection of employees from specific school
     public ObservableList<String> types = FXCollections.observableArrayList("Systems", "Audio/Video", "Applications", "Network");
     public ObservableList<Integer> priorities = FXCollections.observableArrayList(1,2,3,4);
 
-    public TextField appointmentIDTextField;
-
-
+    public TextField ticketIDTextField;
     public TextArea descriptionTextArea;
 
     public ComboBox<String> typeComboBox = new ComboBox<>(types);
@@ -46,7 +44,7 @@ public class AddAppointmentController {
 
 
     public void initialize() {
-        appointmentIDTextField.setText("Auto-Generated");
+        ticketIDTextField.setText("Auto-Generated");
         typeComboBox.setItems(types);
         priorityComboBox.setItems(priorities);
         locationComboBox.setItems(SchoolDaoImpl.getAllSchools());
@@ -64,15 +62,14 @@ public class AddAppointmentController {
             errorAlert.show();
         } else {
             if (EmployeeDaoImpl.isEmpATeacherByID(signedInEmployee.getId())) {
-                AppointmentDaoImpl.addAppointmentTeacher((Teacher) signedInEmployee, typeComboBox.getSelectionModel().getSelectedItem(), locationComboBox.getSelectionModel().getSelectedItem().getSchoolName(),
+                TicketDaoImpl.addTicketTeacher((Teacher) signedInEmployee, typeComboBox.getSelectionModel().getSelectedItem(), locationComboBox.getSelectionModel().getSelectedItem().getSchoolName(),
                         descriptionTextArea.getText(), priorityComboBox.getSelectionModel().getSelectedItem(), signedInTeacher.getId());
                 close(mouseEvent);
             } else if (EmployeeDaoImpl.isEmpATechnicianByID(signedInEmployee.getId()) || EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId())) {
-                AppointmentDaoImpl.addAppointmentTechnician((Technician) signedInEmployee, typeComboBox.getSelectionModel().getSelectedItem(), locationComboBox.getSelectionModel().getSelectedItem().getSchoolName(),
+                TicketDaoImpl.addTicketTechnician((Technician) signedInEmployee, typeComboBox.getSelectionModel().getSelectedItem(), locationComboBox.getSelectionModel().getSelectedItem().getSchoolName(),
                         descriptionTextArea.getText(), priorityComboBox.getSelectionModel().getSelectedItem(), requesterComboBox.getSelectionModel().getSelectedItem().getId(), signedInTechnician.getId());
                 close(mouseEvent);
             }
-
         }
     }
 

@@ -1,7 +1,7 @@
 package View_Controller;
 
 import DataModel.*;
-import Implementations.AppointmentDaoImpl;
+import Implementations.TicketDaoImpl;
 import Implementations.EmployeeDaoImpl;
 import Implementations.SchoolDaoImpl;
 import Implementations.TechnicianDaoImpl;
@@ -20,12 +20,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class UpdateAppointmentController {
+public class UpdateTicketController {
 
     public ObservableList<String> types = FXCollections.observableArrayList("Systems", "Audio/Video", "Applications", "Network");
     public ObservableList<Integer> priorities = FXCollections.observableArrayList(1,2,3,4);
 
-    public TextField appointmentIDTextField;
+    public TextField ticketIDTextField;
     public TextArea descriptionTextBox;
 
     public ComboBox<String> typeComboBox = new ComboBox<>(types);
@@ -54,7 +54,7 @@ public class UpdateAppointmentController {
     }
 
 
-    public void saveUpdatedAppointment(MouseEvent mouseEvent) throws IOException {
+    public void saveUpdatedTicket(MouseEvent mouseEvent) throws IOException {
         if (typeComboBox.getSelectionModel().getSelectedItem() == null || priorityComboBox.getSelectionModel().getSelectedItem() == null ||
                 locationComboBox.getSelectionModel().getSelectedItem() == null ||
                 descriptionTextBox.getText().isEmpty()) {
@@ -64,12 +64,12 @@ public class UpdateAppointmentController {
             errorAlert.show();
         } else {
             if(EmployeeDaoImpl.isEmpATeacherByID(signedInEmployee.getId())) {
-                AppointmentDaoImpl.updateAppointmentTeacher(signedInTeacher, Integer.parseInt(appointmentIDTextField.getText()), typeComboBox.getSelectionModel().getSelectedItem(),
+                TicketDaoImpl.updateTicketTeacher(signedInTeacher, Integer.parseInt(ticketIDTextField.getText()), typeComboBox.getSelectionModel().getSelectedItem(),
                         priorityComboBox.getSelectionModel().getSelectedItem(), locationComboBox.getSelectionModel().getSelectedItem().getSchoolName(),
                         requesterComboBox.getSelectionModel().getSelectedItem().getId(), technicianComboBox.getSelectionModel().getSelectedItem().getId(), descriptionTextBox.getText());
                 close(mouseEvent);
             } else if (EmployeeDaoImpl.isEmpATechnicianByID(signedInEmployee.getId()) || EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId())) {
-                AppointmentDaoImpl.updateAppointmentTechnicianOrManager(signedInEmployee, Integer.parseInt(appointmentIDTextField.getText()), typeComboBox.getSelectionModel().getSelectedItem(),
+                TicketDaoImpl.updateTicketTechnicianOrManager(signedInEmployee, Integer.parseInt(ticketIDTextField.getText()), typeComboBox.getSelectionModel().getSelectedItem(),
                         priorityComboBox.getSelectionModel().getSelectedItem(), locationComboBox.getSelectionModel().getSelectedItem().getSchoolName(),
                         requesterComboBox.getSelectionModel().getSelectedItem().getId(), technicianComboBox.getSelectionModel().getSelectedItem().getId(), descriptionTextBox.getText());
                 close(mouseEvent);
@@ -97,14 +97,14 @@ public class UpdateAppointmentController {
         }
     }
 
-    public void receiveAppointmentAndEmployee(Appointment selectedAppointment, Employee signedInEmployee) {
+    public void receiveTicketAndEmployee(Ticket selectedTicket, Employee signedInEmployee) {
         this.signedInEmployee = signedInEmployee;
-        appointmentIDTextField.setText(String.valueOf(selectedAppointment.getAppointmentID()));
-        descriptionTextBox.setText(selectedAppointment.getDescription());
-        typeComboBox.setValue(selectedAppointment.getType());
-        priorityComboBox.setValue(selectedAppointment.getPriority());
+        ticketIDTextField.setText(String.valueOf(selectedTicket.getTicketID()));
+        descriptionTextBox.setText(selectedTicket.getDescription());
+        typeComboBox.setValue(selectedTicket.getType());
+        priorityComboBox.setValue(selectedTicket.getPriority());
 
-        getComboBoxItems(selectedAppointment);
+        getComboBoxItems(selectedTicket);
         locationComboBox.setValue(selectedSchool);
         if (selectedTechnician != null) {
             technicianComboBox.setValue(selectedTechnician);
@@ -122,17 +122,17 @@ public class UpdateAppointmentController {
 
         } else if (EmployeeDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
             signedInTechnician = (Technician) signedInEmployee;
-            requesterComboBox.setValue(EmployeeDaoImpl.getEmployeeByID(selectedAppointment.getRequesterID()));
+            requesterComboBox.setValue(EmployeeDaoImpl.getEmployeeByID(selectedTicket.getRequesterID()));
         } else if (EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId())) {
             signedInManager = (Manager) signedInEmployee;
-            requesterComboBox.setValue(EmployeeDaoImpl.getEmployeeByID(selectedAppointment.getRequesterID()));
+            requesterComboBox.setValue(EmployeeDaoImpl.getEmployeeByID(selectedTicket.getRequesterID()));
         }
     }
 
-    private void getComboBoxItems(Appointment selectedAppointment) {
-        selectedSchool = SchoolDaoImpl.getSchoolByLocation(selectedAppointment.getLocation());
-        selectedTechnician = TechnicianDaoImpl.getTechnicianByID(selectedAppointment.getTechnicianID());
-        requester = EmployeeDaoImpl.getEmployeeByID(selectedAppointment.getRequesterID());
+    private void getComboBoxItems(Ticket selectedTicket) {
+        selectedSchool = SchoolDaoImpl.getSchoolByLocation(selectedTicket.getLocation());
+        selectedTechnician = TechnicianDaoImpl.getTechnicianByID(selectedTicket.getTechnicianID());
+        requester = EmployeeDaoImpl.getEmployeeByID(selectedTicket.getRequesterID());
 
     }
 
