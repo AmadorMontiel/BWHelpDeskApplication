@@ -1,5 +1,7 @@
 package DataModel;
 
+import java.sql.Timestamp;
+
 public class Ticket {
 
     private int ticketID;
@@ -9,6 +11,7 @@ public class Ticket {
     private int priority;
     private int technicianID;
     private int requesterID;
+    private Timestamp creation_date;
 
     public Ticket(int ticketID, String type, String location, String description, int priority, int technicianID, int requesterID) {
         this.ticketID = ticketID;
@@ -18,6 +21,13 @@ public class Ticket {
         this.priority = priority;
         this.technicianID = technicianID;
         this.requesterID = requesterID;
+    }
+
+    public Ticket(int ticketID, String type, String location, Timestamp creation_date) {
+        this.ticketID = ticketID;
+        this.type = type;
+        this.location = location;
+        this.creation_date = creation_date;
     }
 
     public int getTicketID() {
