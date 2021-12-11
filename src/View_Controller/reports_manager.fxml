@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="634.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.ReportsController">
+<AnchorPane prefHeight="634.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.ReportsManagerController">
    <children>
       <Pane layoutY="2.0" prefHeight="662.0" prefWidth="696.0">
          <children>
@@ -37,21 +37,19 @@
                </font></Label>
             <TableView fx:id="ticketsPerEmployeeTableView" layoutX="23.0" layoutY="349.0" prefHeight="263.0" prefWidth="650.0">
               <columns>
-                <TableColumn fx:id="tPEEmployeeIDColumn" prefWidth="75.0" text="Employee ID" />
-                <TableColumn fx:id="tPEEmployeeFirstNameColumn" prefWidth="74.0" text="First Name" />
-                  <TableColumn fx:id="tPEEmployeeLastNameColumn" prefWidth="83.0" text="Last Name" />
-                  <TableColumn fx:id="tPELocationColumn" prefWidth="75.0" text="Location" />
-                  <TableColumn fx:id="tPETypeColumn" prefWidth="75.0" text="Type" />
-                  <TableColumn fx:id="tPECreateDateAndTimeColumn" prefWidth="108.0" text="Create Date/Time" />
-                  <TableColumn fx:id="tPEAssignedTechnicianColumn" prefWidth="159.0" text="Assigned Technician" />
+                <TableColumn fx:id="tPEEmployeeIDAndNameColumn" prefWidth="150.0" text="Employee Name and ID" />
+                  <TableColumn fx:id="tPELocationColumn" minWidth="0.0" prefWidth="111.0" text="Location" />
+                  <TableColumn fx:id="tPETypeColumn" prefWidth="120.0" text="Type" />
+                  <TableColumn fx:id="tPECreateDateAndTimeColumn" prefWidth="116.0" text="Create Date/Time" />
+                  <TableColumn fx:id="tPEAssignedTechnicianColumn" prefWidth="152.0" text="Assigned Technician" />
               </columns>
             </TableView>
             <Label layoutX="278.0" layoutY="324.0" text="Tickets Per Employee">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Label>
-            <TextField fx:id="employeeSearchTextBox" layoutX="24.0" layoutY="321.0" prefHeight="25.0" prefWidth="171.0" promptText="Search for an employee" />
-            <Button layoutX="621.0" layoutY="623.0" mnemonicParsing="false" text="Back" />
+            <TextField fx:id="employeeSearchTextBox" layoutX="24.0" layoutY="321.0" onKeyTyped="#searchTickets" prefHeight="25.0" prefWidth="171.0" promptText="Search for an employee" />
+            <Button layoutX="621.0" layoutY="623.0" mnemonicParsing="false" onMouseClicked="#close" text="Back" />
          </children>
       </Pane>
    </children>

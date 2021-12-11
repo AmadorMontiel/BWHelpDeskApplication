@@ -189,7 +189,7 @@ public class TicketDaoImpl {
                 int count = rs.getInt("total");
                 String firstName = rs.getString("firstname");
                 String lastName = rs.getString("lastname");
-                String fullNameAndID = "ID: " + technicianID + " Name: " + firstName + " " + lastName;
+                String fullNameAndID = firstName + " " + lastName + " " + technicianID;
 
                 Ticket t = new Ticket(fullNameAndID, count);
                 totalTicketsPerTechnician.add(t);
@@ -198,5 +198,53 @@ public class TicketDaoImpl {
             e.printStackTrace();
         }
         return totalTicketsPerTechnician;
+    }
+
+    public static ObservableList<Ticket> getTotalTickets() {
+        ObservableList<Ticket> totalTickets = FXCollections.observableArrayList();
+
+        try {
+            String sql = "SELECT requester_id, firstName, lastname, location, type, create_date, technician_id from tickets, employees WHERE tickets.requester_id = employees.employee_id";
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int requesterID = rs.getInt("requester_id");
+                String firstName = rs.getString("firstname");
+                String lastName = rs.getString("lastname");
+                String location = rs.getString("location");
+                String type = rs.getString("type");
+                String createDate = rs.getString("create_date");
+                int technicianID = rs.getInt("technician_id");
+                String fullNameAndID = firstName + " " + lastName + " " + requesterID;
+
+                Ticket t = new Ticket(requesterID, fullNameAndID, location, type, createDate, technicianID);
+                totalTickets.add(t);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalTickets;
+    }
+
+    public static Ticket lookupTicket(int ticketID) {
+        ObservableList<Ticket> allTickets = getTotalTickets();
+        for (Ticket searchedTicket : allTickets) {
+            if(searchedTicket.getTicketID() == ticketID) {
+                return searchedTicket;
+            }
+        }
+        return null;
+    }
+    public static ObservableList<Ticket> lookupTicket(String employeeName) {
+        ObservableList<Ticket> searchedTickets = FXCollections.observableArrayList();
+        ObservableList<Ticket> allTickets = getTotalTickets();
+
+        for(Ticket searchedTicket : allTickets) {
+            if(searchedTicket.getFullNameAndID().contains(employeeName)) {
+                searchedTickets.add(searchedTicket);
+            }
+        }
+        return searchedTickets;
     }
 }

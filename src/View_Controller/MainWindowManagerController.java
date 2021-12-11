@@ -34,8 +34,8 @@ public class MainWindowManagerController {
     }
 
     public void reportsClicked(MouseEvent mouseEvent) throws IOException {
-        FXMLLoader loader = getFxmlLoader("reports.fxml");
-        ReportsController reportsController = loader.getController();
+        FXMLLoader loader = getFxmlLoader("reports_manager.fxml");
+        ReportsManagerController reportsManagerController = loader.getController();
         loadNewScene(mouseEvent, loader);
     }
 

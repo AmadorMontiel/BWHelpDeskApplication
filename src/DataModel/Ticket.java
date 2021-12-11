@@ -9,7 +9,7 @@ public class Ticket {
     private int priority;
     private int technicianID;
     private int requesterID;
-    private String create_date;
+    private String createDate;
     private int count;
     private String fullNameAndID;
 
@@ -23,16 +23,25 @@ public class Ticket {
         this.requesterID = requesterID;
     }
 
-    public Ticket(int ticketID, String type, String location, String create_date) {
+    public Ticket(int ticketID, String type, String location, String createDate) {
         this.ticketID = ticketID;
         this.type = type;
         this.location = location;
-        this.create_date = create_date;
+        this.createDate = createDate;
     }
 
     public Ticket(String fullNameAndID, int count) {
         this.fullNameAndID = fullNameAndID;
         this.count = count;
+    }
+
+    public Ticket(int requesterID, String fullNameAndID, String location, String type, String createDate, int technicianID) {
+        this.requesterID = requesterID;
+        this.fullNameAndID = fullNameAndID;
+        this.location = location;
+        this.type = type;
+        this.createDate = createDate;
+        this.technicianID = technicianID;
     }
 
     public int getTicketID() {
@@ -91,12 +100,12 @@ public class Ticket {
         this.requesterID = requesterID;
     }
 
-    public String getCreate_date() {
-        return create_date;
+    public String getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(String create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 
     public int getCount() {
