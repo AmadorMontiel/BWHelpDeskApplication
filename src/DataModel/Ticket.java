@@ -44,6 +44,16 @@ public class Ticket {
         this.technicianID = technicianID;
     }
 
+    public Ticket(int ticketID, String type, int priority, String location, String createDate, String fullNameAndID) {
+        this.technicianID = ticketID;
+        this.ticketID = ticketID;
+        this.type = type;
+        this.priority = priority;
+        this.location = location;
+        this.createDate = createDate;
+        this.fullNameAndID = fullNameAndID;
+    }
+
     public int getTicketID() {
         return ticketID;
     }

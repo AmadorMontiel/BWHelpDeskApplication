@@ -32,7 +32,11 @@ public class MainWindowTechnicianController {
         Platform.exit();
     }
 
-    public void reportsClicked(MouseEvent mouseEvent) {
+    public void reportsClicked(MouseEvent mouseEvent) throws IOException {
+        FXMLLoader loader = getFxmlLoader("reports_technician.fxml");
+        ReportsTechnicianController reportsTechnicianController = loader.getController();
+        reportsTechnicianController.receiveTechnician(signedInEmployee);
+        loadNewScene(mouseEvent, loader);
     }
 
     public void addTicketClicked(MouseEvent mouseEvent) throws IOException {

@@ -14,6 +14,8 @@ import java.sql.SQLException;
 
 public class TicketDaoImpl {
 
+
+
     public static ObservableList<Ticket> getAllTickets() {
         ObservableList<Ticket> tickets = FXCollections.observableArrayList();
         try {
@@ -236,6 +238,7 @@ public class TicketDaoImpl {
         }
         return null;
     }
+
     public static ObservableList<Ticket> lookupTicket(String employeeName) {
         ObservableList<Ticket> searchedTickets = FXCollections.observableArrayList();
         ObservableList<Ticket> allTickets = getTotalTickets();
@@ -246,5 +249,61 @@ public class TicketDaoImpl {
             }
         }
         return searchedTickets;
+    }
+
+    public static ObservableList<Ticket> getAllTicketsByTechnician(int selectedTechnicianID) {
+        ObservableList<Ticket> allTicketsByTechnician = FXCollections.observableArrayList();
+
+        try {
+            String sql = "SELECT technician_id, type, priority, location, create_date, firstname, lastname, requester_id FROM tickets, employees WHERE technician_id = " + selectedTechnicianID + " AND tickets.requester_id = employees.employee_id";
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int technicianID = rs.getInt("technician_id");
+                String type = rs.getString("type");
+                int priority = rs.getInt("priority");
+                String location = rs.getString("location");
+                String createDate = rs.getString("create_date");
+                String firstName = rs.getString("firstname");
+                String lastName = rs.getString("lastname");
+                int requesterID = rs.getInt("requester_id");
+                String fullNameAndID = firstName + " " + lastName + " " + requesterID;
+
+                Ticket t = new Ticket(technicianID, type, priority, location, createDate, fullNameAndID);
+                allTicketsByTechnician.add(t);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allTicketsByTechnician;
+    }
+
+    public static ObservableList<Ticket> getTicketsWithNoTechnician() {
+        ObservableList<Ticket> ticketsWithNoTechnician = FXCollections.observableArrayList();
+        try {
+            String sql = "SELECT ticket_id, type, priority, location, create_date, firstname, lastname, requester_id from tickets, employees WHERE technician_id IS NULL and tickets.requester_id = employees.employee_id";
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int ticketID = rs.getInt("ticket_id");
+                String type = rs.getString("type");
+                int priority = rs.getInt("priority");
+                String location = rs.getString("location");
+                String createDate = rs.getString("create_date");
+                String firstName = rs.getString("firstname");
+                String lastName = rs.getString("lastName");
+                int requesterID = rs.getInt("requester_id");
+                String fullNameAndID = firstName + " " + lastName + " " + requesterID;
+
+                Ticket t = new Ticket(ticketID, type, priority, location, createDate, fullNameAndID);
+                ticketsWithNoTechnician.add(t);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ticketsWithNoTechnician;
     }
 }

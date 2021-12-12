@@ -1,6 +1,8 @@
 package View_Controller;
 
+import DataModel.Employee;
 import DataModel.Ticket;
+import Implementations.EmployeeDaoImpl;
 import Implementations.TicketDaoImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +18,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ReportsManagerController {
+
+    private Employee signedInEmployee;
+
     public ObservableList<String> types = FXCollections.observableArrayList("Systems", "Audio/Video", "Applications", "Network");
 
     public TableView<Ticket> ticketTypeByLocationTableView;
@@ -94,7 +99,10 @@ public class ReportsManagerController {
     }
 
     public void close(MouseEvent event) throws IOException {
+        EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId());
         FXMLLoader loader = getFxmlLoader();
+        MainWindowManagerController mainWindowManagerController = loader.getController();
+        mainWindowManagerController.receiveUser(signedInEmployee);
         loadNewScene(event, loader);
     }
 
@@ -104,6 +112,7 @@ public class ReportsManagerController {
         loader.load();
         return loader;
     }
+
     private void loadNewScene(MouseEvent event, FXMLLoader loader) {
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
@@ -112,4 +121,7 @@ public class ReportsManagerController {
         stage.show();
     }
 
+    public void receiveManager(Employee signedInEmployee) {
+        this.signedInEmployee = signedInEmployee;
+    }
 }

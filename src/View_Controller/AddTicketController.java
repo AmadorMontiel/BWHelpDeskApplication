@@ -103,7 +103,12 @@ public class AddTicketController {
             loader.setLocation(getClass().getResource("mainwindow_technician.fxml"));
             loader.load();
             return loader;
-        } else return null;
+        } else if (EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId())) {
+            loader.setLocation(getClass().getResource("mainwindow_manager.fxml"));
+            loader.load();
+            return loader;
+        } else
+            return null;
     }
 
     private void loadNewScene(MouseEvent event, FXMLLoader loader) {

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="349.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.ReportsTechnicianController">
+   <children>
+      <Pane prefHeight="647.0" prefWidth="679.0">
+         <children>
+            <Label layoutX="307.0" layoutY="14.0" text="Reports">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+            <TableView fx:id="assignedTicketsByTechnicianTable" layoutX="6.0" layoutY="119.0" prefHeight="200.0" prefWidth="669.0">
+              <columns>
+                <TableColumn fx:id="attTechnicianIDColumn" prefWidth="91.0" text="Technician ID" />
+                <TableColumn fx:id="attTypeColumn" prefWidth="59.0" text="Type" />
+                  <TableColumn fx:id="attPriorityColumn" prefWidth="55.0" text="Priority" />
+                  <TableColumn fx:id="attLocationColumn" prefWidth="124.0" text="Location" />
+                  <TableColumn fx:id="attCreateDateColumn" prefWidth="147.0" text="Create Date" />
+                  <TableColumn fx:id="attRequesterIDAndNameColumn" prefWidth="192.0" text="Requester ID and Name" />
+              </columns>
+            </TableView>
+            <Button layoutX="624.0" layoutY="608.0" mnemonicParsing="false" onMousePressed="#close" text="Back" />
+            <ComboBox fx:id="technicianComboBox" layoutX="6.0" layoutY="88.0" onAction="#technicianSelection" prefWidth="150.0" promptText="Select Technician" />
+            <Label layoutX="238.0" layoutY="90.0" text="Assigned Tickets By Technician">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TableView fx:id="ticketsWithNoTechnicianTable" layoutX="6.0" layoutY="377.0" prefHeight="200.0" prefWidth="669.0">
+              <columns>
+                  <TableColumn fx:id="twntTicketIDColumn" prefWidth="75.0" text="Ticket ID" />
+                <TableColumn fx:id="twntTypeColumn" prefWidth="75.0" text="Type" />
+                <TableColumn fx:id="twntPriorityColumn" prefWidth="48.0" text="Priority" />
+                  <TableColumn fx:id="twntLocationColumn" prefWidth="139.0" text="Location" />
+                  <TableColumn fx:id="twntCreateDateColumn" prefWidth="143.0" text="Create Date" />
+                  <TableColumn fx:id="twntRequesterIDAndNameColumn" prefWidth="188.0" text="Requester ID and Name" />
+              </columns>
+            </TableView>
+            <Label layoutX="215.0" layoutY="346.0" text="Tickets With No Assigned Technicians">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children></Pane>
+   </children>
+</AnchorPane>
