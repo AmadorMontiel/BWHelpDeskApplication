@@ -9,15 +9,8 @@ public class Teacher extends Employee {
         super(id, firstName, lastName);
     }
 
-    public Teacher(int id, String uName) {
-        super(id, uName);
-    }
-
     public Teacher(int id, String uName, String firstName, String lastName) {
         super(id, uName, firstName, lastName);
     }
 
-    public void createAppointment() {
-
-    }
 }

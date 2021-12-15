@@ -65,7 +65,7 @@ public class MainWindowManagerController {
             } else {
                 errorAlert.setTitle("Error");
                 errorAlert.setHeaderText("No Ticket Selected");
-                errorAlert.setContentText("Please select an Ticket to delete");
+                errorAlert.setContentText("Please select a Ticket to delete");
                 errorAlert.show();
             }
         }

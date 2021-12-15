@@ -18,9 +18,6 @@ public class Technician extends Employee {
         super(id, firstName, lastName);
     }
 
-    public void takeAppointment() {
-
-    }
 
     @Override
     public String toString() {
