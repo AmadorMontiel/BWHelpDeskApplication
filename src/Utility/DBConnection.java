@@ -13,30 +13,12 @@ import java.sql.SQLException;
  */
 public class DBConnection {
 
-    /**
-     * JDBC URL information
-     */
-    private static final String protocol = "jdbc";
-    private static final String vendor = ":mysql:";
-    private static final String ipAddress = "//localhost:3306/schedulingapplication";
-
-    /**
-     * Complete JDBC URL
-     */
-    private static final String dbURL = protocol + vendor + ipAddress;
+    private static final String url ="jdbc:mysql://bsdmontieldatabase.mysql.database.azure.com:3306/bwsd_db?useSSL=true&requireSSL=false";
 
     /**
      * Connection Interface Reference
      */
     private static Connection conn = null;
-    /**
-     * DB Username
-     */
-    private static final String username = "root";
-    /**
-     * DB Password
-     */
-    private static final String password = "WhiteSox$$01";
 
     /**
      * Starts the connection using the DBUrl, the username and the password.
@@ -44,7 +26,7 @@ public class DBConnection {
      */
     public static void startConnection() {
         try {
-            conn = DriverManager.getConnection(dbURL,username,password);
+            conn = DriverManager.getConnection(url, "montiel@bsdmontieldatabase", "Wgudb5751");
         }
         catch (SQLException e){
             e.printStackTrace();

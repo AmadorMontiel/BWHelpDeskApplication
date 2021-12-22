@@ -14,7 +14,7 @@ public class Main extends Application {
         @Override
         public void start(Stage primaryStage) throws Exception{
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../View_Controller/login.fxml")));
-            primaryStage.setTitle("Broadwater Technician Scheduling");
+            primaryStage.setTitle("Broadwater Help Desk Application");
             primaryStage.setScene(new Scene(root, 450, 300));
             primaryStage.show();
         }

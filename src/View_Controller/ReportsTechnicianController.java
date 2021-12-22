@@ -3,7 +3,7 @@ package View_Controller;
 import DataModel.Employee;
 import DataModel.Technician;
 import DataModel.Ticket;
-import Implementations.EmployeeDaoImpl;
+import Implementations.TeacherDAOImpl;
 import Implementations.TechnicianDaoImpl;
 import Implementations.TicketDaoImpl;
 import javafx.fxml.FXMLLoader;
@@ -62,7 +62,7 @@ public class ReportsTechnicianController {
 
     }
     public void close(MouseEvent event) throws IOException {
-        EmployeeDaoImpl.isEmpATeacherByID(signedInEmployee.getId());
+        TeacherDAOImpl.isEmpATeacherByID(signedInEmployee.getId());
         FXMLLoader loader = getFxmlLoader();
         MainWindowTechnicianController mainWindowTechnicianController = loader.getController();
         mainWindowTechnicianController.receiveUser(signedInEmployee);

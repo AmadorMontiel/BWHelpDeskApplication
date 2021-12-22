@@ -2,7 +2,7 @@ package View_Controller;
 
 import DataModel.Employee;
 import DataModel.Ticket;
-import Implementations.EmployeeDaoImpl;
+import Implementations.ManagerDAOImpl;
 import Implementations.TicketDaoImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -99,7 +99,7 @@ public class ReportsManagerController {
     }
 
     public void close(MouseEvent event) throws IOException {
-        EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId());
+        ManagerDAOImpl.isEmpAManagerByID(signedInEmployee.getId());
         FXMLLoader loader = getFxmlLoader();
         MainWindowManagerController mainWindowManagerController = loader.getController();
         mainWindowManagerController.receiveUser(signedInEmployee);

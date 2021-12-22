@@ -5,22 +5,8 @@ public abstract class Employee {
     private String firstName;
     private String lastName;
     private String userName;
-    private String emailAddress;
-    private String phoneNumber;
     private String password;
     private int schoolID;
-
-    public Employee(int id, String firstName, String lastName,
-                    String emailAddress, String phoneNumber,String username, String password, int schoolID) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailAddress = emailAddress;
-        this.phoneNumber = phoneNumber;
-        this.userName = username;
-        this.password = password;
-        this.schoolID = schoolID;
-    }
 
     public Employee(int id, String firstName, String lastName) {
         this.id = id;
@@ -62,22 +48,6 @@ public abstract class Employee {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getUserName() {

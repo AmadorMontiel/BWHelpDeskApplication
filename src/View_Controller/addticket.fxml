@@ -6,14 +6,14 @@
 
 <AnchorPane prefHeight="433.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.AddTicketController">
     <children>
-        <Label layoutX="14.0" layoutY="14.0" text="Add Appointment">
+        <Label layoutX="14.0" layoutY="14.0" text="Add Ticket">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font></Label>
         <Button id="closeButton" layoutX="541.0" layoutY="394.0" mnemonicParsing="false" onMousePressed="#close" text="Close" />
         <VBox layoutX="12.0" layoutY="50.0" prefHeight="196.0" prefWidth="123.0" spacing="20.0">
             <children>
-                <Label text="Appointment ID" />
+                <Label text="Ticket ID" />
                 <Label text="Type" />
                 <Label text="Priority" />
                 <Label text="Location" />

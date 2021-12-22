@@ -182,7 +182,7 @@ public class TicketDaoImpl {
         ObservableList<Ticket> totalTicketsPerTechnician = FXCollections.observableArrayList();
 
         try {
-            String sql = "SELECT technician_id, COUNT(*) as total, firstname, lastname FROM tickets, employees WHERE employee_id = technician_id";
+            String sql = "SELECT technician_id, COUNT(*) as total, firstname, lastname FROM tickets, employees WHERE employees.employee_id = tickets.technician_id group by technician_id";
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 

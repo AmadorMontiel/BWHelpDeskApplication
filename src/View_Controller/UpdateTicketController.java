@@ -1,10 +1,7 @@
 package View_Controller;
 
 import DataModel.*;
-import Implementations.TicketDaoImpl;
-import Implementations.EmployeeDaoImpl;
-import Implementations.SchoolDaoImpl;
-import Implementations.TechnicianDaoImpl;
+import Implementations.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -63,12 +60,12 @@ public class UpdateTicketController {
             errorAlert.setContentText("All information must be filled out.");
             errorAlert.show();
         } else {
-            if(EmployeeDaoImpl.isEmpATeacherByID(signedInEmployee.getId())) {
+            if(TeacherDAOImpl.isEmpATeacherByID(signedInEmployee.getId())) {
                 TicketDaoImpl.updateTicketTeacher(signedInTeacher, Integer.parseInt(ticketIDTextField.getText()), typeComboBox.getSelectionModel().getSelectedItem(),
                         priorityComboBox.getSelectionModel().getSelectedItem(), locationComboBox.getSelectionModel().getSelectedItem().getSchoolName(),
                         requesterComboBox.getSelectionModel().getSelectedItem().getId(), technicianComboBox.getSelectionModel().getSelectedItem().getId(), descriptionTextBox.getText());
                 close(mouseEvent);
-            } else if (EmployeeDaoImpl.isEmpATechnicianByID(signedInEmployee.getId()) || EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId())) {
+            } else if (TechnicianDaoImpl.isEmpATechnicianByID(signedInEmployee.getId()) || ManagerDAOImpl.isEmpAManagerByID(signedInEmployee.getId())) {
                 TicketDaoImpl.updateTicketTechnicianOrManager(signedInEmployee, Integer.parseInt(ticketIDTextField.getText()), typeComboBox.getSelectionModel().getSelectedItem(),
                         priorityComboBox.getSelectionModel().getSelectedItem(), locationComboBox.getSelectionModel().getSelectedItem().getSchoolName(),
                         requesterComboBox.getSelectionModel().getSelectedItem().getId(), technicianComboBox.getSelectionModel().getSelectedItem().getId(), descriptionTextBox.getText());
@@ -79,17 +76,17 @@ public class UpdateTicketController {
 
     public void close(MouseEvent mouseEvent) throws IOException {
 
-        if (EmployeeDaoImpl.isEmpATeacherByID(signedInEmployee.getId())) {
+        if (TeacherDAOImpl.isEmpATeacherByID(signedInEmployee.getId())) {
             FXMLLoader loader = getFxmlLoader();
             MainWindowTeacherController mainWindowTeacherController = loader.getController();
             mainWindowTeacherController.receiveUser(signedInEmployee);
             loadNewScene(mouseEvent, loader);
-        } else if (EmployeeDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
+        } else if (TechnicianDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
             FXMLLoader loader = getFxmlLoader();
             MainWindowTechnicianController mainWindowTechnicianController = loader.getController();
             mainWindowTechnicianController.receiveUser(signedInEmployee);
             loadNewScene(mouseEvent, loader);
-        } else if (EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId())) {
+        } else if (ManagerDAOImpl.isEmpAManagerByID(signedInEmployee.getId())) {
             FXMLLoader loader = getFxmlLoader();
             MainWindowManagerController mainWindowManagerController = loader.getController();
             mainWindowManagerController.receiveUser(signedInEmployee);
@@ -112,7 +109,7 @@ public class UpdateTicketController {
             technicianComboBox.setValue(null);
         }
 
-        if (EmployeeDaoImpl.isEmpATeacherByID(signedInEmployee.getId())) {
+        if (TeacherDAOImpl.isEmpATeacherByID(signedInEmployee.getId())) {
             signedInTeacher = (Teacher) signedInEmployee;
             technicianComboBox.setDisable(true);
             technicianComboBox.setOpacity(1);
@@ -120,10 +117,10 @@ public class UpdateTicketController {
             requesterComboBox.setDisable(true);
             requesterComboBox.setOpacity(1);
 
-        } else if (EmployeeDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
+        } else if (TechnicianDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
             signedInTechnician = (Technician) signedInEmployee;
             requesterComboBox.setValue(EmployeeDaoImpl.getEmployeeByID(selectedTicket.getRequesterID()));
-        } else if (EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId())) {
+        } else if (ManagerDAOImpl.isEmpAManagerByID(signedInEmployee.getId())) {
             signedInManager = (Manager) signedInEmployee;
             requesterComboBox.setValue(EmployeeDaoImpl.getEmployeeByID(selectedTicket.getRequesterID()));
         }
@@ -138,15 +135,15 @@ public class UpdateTicketController {
 
     private FXMLLoader getFxmlLoader() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        if (EmployeeDaoImpl.isEmpATeacherByID(signedInEmployee.getId())) {
+        if (TeacherDAOImpl.isEmpATeacherByID(signedInEmployee.getId())) {
             loader.setLocation(getClass().getResource("mainwindow_teacher.fxml"));
             loader.load();
             return loader;
-        } else if (EmployeeDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
+        } else if (TechnicianDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
             loader.setLocation(getClass().getResource("mainwindow_technician.fxml"));
             loader.load();
             return loader;
-        } else if (EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId())) {
+        } else if (ManagerDAOImpl.isEmpAManagerByID(signedInEmployee.getId())) {
             loader.setLocation(getClass().getResource("mainwindow_manager.fxml"));
             loader.load();
             return loader;

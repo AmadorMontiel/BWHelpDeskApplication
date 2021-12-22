@@ -1,10 +1,7 @@
 package View_Controller;
 
 import DataModel.*;
-import Implementations.TicketDaoImpl;
-import Implementations.EmployeeDaoImpl;
-import Implementations.SchoolDaoImpl;
-import Implementations.TechnicianDaoImpl;
+import Implementations.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +19,7 @@ import java.io.IOException;
 
 public class AddTicketController {
 
-    //TODO change requester combobox to only allow selection of employees from specific school
+
     public ObservableList<String> types = FXCollections.observableArrayList("Systems", "Audio/Video", "Applications", "Network");
     public ObservableList<Integer> priorities = FXCollections.observableArrayList(1,2,3,4);
 
@@ -61,11 +58,11 @@ public class AddTicketController {
             errorAlert.setContentText("All information must be filled out.");
             errorAlert.show();
         } else {
-            if (EmployeeDaoImpl.isEmpATeacherByID(signedInEmployee.getId())) {
+            if (TeacherDAOImpl.isEmpATeacherByID(signedInEmployee.getId())) {
                 TicketDaoImpl.addTicketTeacher((Teacher) signedInEmployee, typeComboBox.getSelectionModel().getSelectedItem(), locationComboBox.getSelectionModel().getSelectedItem().getSchoolName(),
                         descriptionTextArea.getText(), priorityComboBox.getSelectionModel().getSelectedItem(), signedInTeacher.getId());
                 close(mouseEvent);
-            } else if (EmployeeDaoImpl.isEmpATechnicianByID(signedInEmployee.getId()) || EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId())) {
+            } else if (TechnicianDaoImpl.isEmpATechnicianByID(signedInEmployee.getId()) || ManagerDAOImpl.isEmpAManagerByID(signedInEmployee.getId())) {
                 TicketDaoImpl.addTicketTechnician((Technician) signedInEmployee, typeComboBox.getSelectionModel().getSelectedItem(), locationComboBox.getSelectionModel().getSelectedItem().getSchoolName(),
                         descriptionTextArea.getText(), priorityComboBox.getSelectionModel().getSelectedItem(), requesterComboBox.getSelectionModel().getSelectedItem().getId(), signedInTechnician.getId());
                 close(mouseEvent);
@@ -75,17 +72,17 @@ public class AddTicketController {
 
     public void close(MouseEvent event) throws IOException {
 
-        if (EmployeeDaoImpl.isEmpATeacherByID(signedInEmployee.getId())) {
+        if (TeacherDAOImpl.isEmpATeacherByID(signedInEmployee.getId())) {
             FXMLLoader loader = getFxmlLoader();
             MainWindowTeacherController mainWindowTeacherController = loader.getController();
             mainWindowTeacherController.receiveUser(signedInEmployee);
             loadNewScene(event, loader);
-        } else if (EmployeeDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
+        } else if (TechnicianDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
             FXMLLoader loader = getFxmlLoader();
             MainWindowTechnicianController mainWindowTechnicianController = loader.getController();
             mainWindowTechnicianController.receiveUser(signedInEmployee);
             loadNewScene(event, loader);
-        } else if (EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId())) {
+        } else if (ManagerDAOImpl.isEmpAManagerByID(signedInEmployee.getId())) {
             FXMLLoader loader = getFxmlLoader();
             MainWindowManagerController mainWindowManagerController = loader.getController();
             mainWindowManagerController.receiveUser(signedInEmployee);
@@ -95,15 +92,15 @@ public class AddTicketController {
 
     private FXMLLoader getFxmlLoader() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        if (EmployeeDaoImpl.isEmpATeacherByID(signedInEmployee.getId())) {
+        if (TeacherDAOImpl.isEmpATeacherByID(signedInEmployee.getId())) {
             loader.setLocation(getClass().getResource("mainwindow_teacher.fxml"));
             loader.load();
             return loader;
-        } else if (EmployeeDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
+        } else if (TechnicianDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
             loader.setLocation(getClass().getResource("mainwindow_technician.fxml"));
             loader.load();
             return loader;
-        } else if (EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId())) {
+        } else if (ManagerDAOImpl.isEmpAManagerByID(signedInEmployee.getId())) {
             loader.setLocation(getClass().getResource("mainwindow_manager.fxml"));
             loader.load();
             return loader;
@@ -121,16 +118,16 @@ public class AddTicketController {
 
     public void receiveUser(Employee employeeSigningIn) {
         signedInEmployee = employeeSigningIn;
-        if(EmployeeDaoImpl.isEmpATeacherByID(signedInEmployee.getId())) {
+        if(TeacherDAOImpl.isEmpATeacherByID(signedInEmployee.getId())) {
             assignedTechnicianComboBox.setDisable(true);
             signedInTeacher = new Teacher(employeeSigningIn.getId(), employeeSigningIn.getFirstName(), employeeSigningIn.getLastName());
             requesterComboBox.setValue(EmployeeDaoImpl.getEmployeeByID(signedInEmployee.getId()));
             requesterComboBox.setDisable(true);
             requesterComboBox.setOpacity(1);
-        } else if (EmployeeDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
+        } else if (TechnicianDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
             signedInTechnician = new Technician((employeeSigningIn.getId()), employeeSigningIn.getFirstName(), employeeSigningIn.getLastName());
             assignedTechnicianComboBox.setItems(TechnicianDaoImpl.getAllTechnicians());
-        } else if (EmployeeDaoImpl.isEmpAManagerByID(signedInEmployee.getId())) {
+        } else if (ManagerDAOImpl.isEmpAManagerByID(signedInEmployee.getId())) {
             signedInManager = new Manager(employeeSigningIn.getId(), employeeSigningIn.getFirstName(), employeeSigningIn.getLastName());
             assignedTechnicianComboBox.setItems(TechnicianDaoImpl.getAllTechnicians());
         }
