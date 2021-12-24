@@ -62,9 +62,13 @@ public class AddTicketController {
                 TicketDaoImpl.addTicketTeacher((Teacher) signedInEmployee, typeComboBox.getSelectionModel().getSelectedItem(), locationComboBox.getSelectionModel().getSelectedItem().getSchoolName(),
                         descriptionTextArea.getText(), priorityComboBox.getSelectionModel().getSelectedItem(), signedInTeacher.getId());
                 close(mouseEvent);
-            } else if (TechnicianDaoImpl.isEmpATechnicianByID(signedInEmployee.getId()) || ManagerDAOImpl.isEmpAManagerByID(signedInEmployee.getId())) {
+            } else if (TechnicianDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
                 TicketDaoImpl.addTicketTechnician((Technician) signedInEmployee, typeComboBox.getSelectionModel().getSelectedItem(), locationComboBox.getSelectionModel().getSelectedItem().getSchoolName(),
                         descriptionTextArea.getText(), priorityComboBox.getSelectionModel().getSelectedItem(), requesterComboBox.getSelectionModel().getSelectedItem().getId(), signedInTechnician.getId());
+                close(mouseEvent);
+            } else if (ManagerDAOImpl.isEmpAManagerByID(signedInEmployee.getId())) {
+                TicketDaoImpl.addTicketManager((Manager) signedInEmployee, typeComboBox.getSelectionModel().getSelectedItem(), locationComboBox.getSelectionModel().getSelectedItem().getSchoolName(),
+                        descriptionTextArea.getText(), priorityComboBox.getSelectionModel().getSelectedItem(), requesterComboBox.getSelectionModel().getSelectedItem().getId(), assignedTechnicianComboBox.getSelectionModel().getSelectedItem().getId());
                 close(mouseEvent);
             }
         }
@@ -126,7 +130,9 @@ public class AddTicketController {
             requesterComboBox.setOpacity(1);
         } else if (TechnicianDaoImpl.isEmpATechnicianByID(signedInEmployee.getId())) {
             signedInTechnician = new Technician((employeeSigningIn.getId()), employeeSigningIn.getFirstName(), employeeSigningIn.getLastName());
-            assignedTechnicianComboBox.setItems(TechnicianDaoImpl.getAllTechnicians());
+            assignedTechnicianComboBox.setValue(signedInTechnician);
+            assignedTechnicianComboBox.setDisable(true);
+            assignedTechnicianComboBox.setOpacity(1);
         } else if (ManagerDAOImpl.isEmpAManagerByID(signedInEmployee.getId())) {
             signedInManager = new Manager(employeeSigningIn.getId(), employeeSigningIn.getFirstName(), employeeSigningIn.getLastName());
             assignedTechnicianComboBox.setItems(TechnicianDaoImpl.getAllTechnicians());

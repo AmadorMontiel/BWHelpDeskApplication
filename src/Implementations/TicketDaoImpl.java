@@ -1,9 +1,6 @@
 package Implementations;
 
-import DataModel.Employee;
-import DataModel.Teacher;
-import DataModel.Technician;
-import DataModel.Ticket;
+import DataModel.*;
 import Utility.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -104,6 +101,25 @@ public class TicketDaoImpl {
             ps.setInt(4, priority);
             ps.setString(5, technician.getUserName());
             ps.setString(6, technician.getUserName());
+            ps.setInt(7, technicianID);
+            ps.setInt(8, requesterID);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void addTicketManager(Manager manager, String type, String location, String description, int priority, int requesterID, int technicianID) {
+        try {
+            String sql = "INSERT INTO tickets (type, location, description, priority, created_by, last_updated_by, technician_id, requester_id)" +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ps.setString(1, type);
+            ps.setString(2, location);
+            ps.setString(3, description);
+            ps.setInt(4, priority);
+            ps.setString(5, manager.getUserName());
+            ps.setString(6, manager.getUserName());
             ps.setInt(7, technicianID);
             ps.setInt(8, requesterID);
             ps.execute();
@@ -306,4 +322,6 @@ public class TicketDaoImpl {
         }
         return ticketsWithNoTechnician;
     }
+
+
 }

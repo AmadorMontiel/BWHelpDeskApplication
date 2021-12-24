@@ -16,6 +16,6 @@ public class Technician extends Employee {
 
     @Override
     public String toString() {
-        return getFirstName() +" " + getLastName() + "ID: " + getId();
+        return getFirstName() +" " + getLastName() + " ID: " + getId();
     }
 }
